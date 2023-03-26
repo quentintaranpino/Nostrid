@@ -393,7 +393,10 @@
 
     private void NoteReacted(object? sender, (string eventId, string reactorId) data)
     {
-        if (_disposed || (Tree.Note.Id != data.eventId && Tree.Note.ReplaceableId != data.eventId) || accountService.MainAccount!.Id != data.reactorId)
+        if (_disposed 
+            || (Tree.Note.Id != data.eventId && Tree.Note.ReplaceableId != data.eventId) 
+            || accountService.MainAccount == null
+            || accountService.MainAccount.Id != data.reactorId)
             return;
 
         likeClicked = true;
